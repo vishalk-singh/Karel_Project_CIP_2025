@@ -25,16 +25,53 @@ Remember that your program should work for any world that meets the above condit
 
 
 def main():
-    pass
+    while front_is_clear():
+        move_to_next_hospital()
+        build_hospital()
 
-def turn_right():
-   for i in range(3):
-      turn_left()
+def build_hospital():
+    build_tower()
+    move_safely()
+    build_tower()
 
-def turn_around():
-    turn_left()
-    turn_left()
+def build_tower():
+    build_a_wall()
+    move_to_bottom()
 
+def move_to_bottom():
+    face_south()
+    while front_is_clear():
+        move()
+    face_east()
 
+def build_a_wall():
+    face_north()
+    for i in range(3):
+        if no_beepers_present():
+            put_beeper()
+        move_safely()
+        put_beeper()
+    face_east()
+
+def move_to_next_hospital():
+    move_safely()
+    while no_beepers_present():
+        move_safely()
+
+def face_north():
+    while not_facing_north():
+        turn_left()
+
+def face_south():
+    while not_facing_south():
+        turn_left()
+
+def face_east():
+    while not_facing_east():
+        turn_left()
+
+def move_safely():
+    if front_is_clear():
+        move()
 if __name__ == "__main__":
     run_karel_program()
